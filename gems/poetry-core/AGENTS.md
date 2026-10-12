@@ -128,7 +128,9 @@ files against the manifest stamped at last bless.
 - Lifecycle work goes through the per-connect scope (`helpers/scope.js`)
   and the behaviors over it (`behaviors/`: `useListen`, `useEscape`,
   `useBeforeCache`, `usePresence`, `usePortal`, `useScrollLock`,
-  `useAnnounce`, `useLayers`, `useTypeahead`, `useMobile`): set up in
+  `useAnnounce`, `useLayers`, `useTypeahead`, `useMobile`, and the effect
+  behaviors `useInterval`, `useTimeout`, `useInView`, `useMeasure`,
+  `useMutation`, `useClipboard`): set up in
   `connect()`, undone by the one line `teardown(this)` in `disconnect()`,
   never by a hand-rolled list of unsubscribes. A behavior returns a handle
   (an unlisten, a lock/unlock pair) and never assigns methods onto the
