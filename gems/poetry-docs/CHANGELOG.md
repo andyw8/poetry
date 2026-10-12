@@ -5,6 +5,7 @@
 ### Changed
 
 - The theming guide describes the design import's faint-edge warning.
+- The UI library page says that `poetry:add` refreshes the controllers manifest for an item with a Stimulus controller.
 
 ## [0.1.12] - 2026-10-07
 

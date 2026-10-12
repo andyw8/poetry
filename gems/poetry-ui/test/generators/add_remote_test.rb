@@ -131,5 +131,37 @@ module Poetry
       # (the old flat glob EISDIR-crashed reading the directory entry).
       assert_file "app/components/poetry/ui/tooltip/previews/provider_row.html.erb"
     end
+
+    def test_an_item_with_a_stimulus_controller_refreshes_the_controllers_manifest
+      controller = <<~JS
+        import { Controller } from "@hotwired/stimulus"
+
+        export default class extends Controller {
+          static targets = ["count"]
+          static values = { step: Number }
+
+          tick() {}
+        }
+      JS
+      write_fixture("ticker", { "name" => "ticker", "type" => "registry:component",
+                                "files" => [{ "path" => "app/javascript/controllers/acme/ticker_controller.js",
+                                              "content" => controller }] })
+      output = run_generator %w[./items/ticker.json]
+
+      assert_match(%r{stimulus.*config/controllers_manifest.json \(1 controller\)}, output)
+      assert_file "config/controllers_manifest.json" do |manifest|
+        entry = JSON.parse(manifest).fetch("acme--ticker")
+
+        assert_equal ["count"], entry["targets"]
+        assert_includes entry["methods"], "tick"
+      end
+    end
+
+    def test_an_item_without_a_controller_leaves_the_controllers_manifest_alone
+      prepare_remote_fixtures
+      run_generator %w[./items/fancy-widget.json]
+
+      assert_no_file "config/controllers_manifest.json"
+    end
   end
 end

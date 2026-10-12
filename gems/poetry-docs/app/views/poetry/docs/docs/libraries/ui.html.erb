@@ -197,6 +197,14 @@
         <code>poetry:diff</code> report shows exactly where your copies
         stand against what the gems now ship.
       </p>
+      <p>
+        An item from a registry that brings a Stimulus controller installs
+        it under <code>app/javascript/controllers</code> and rewrites
+        <code>config/controllers_manifest.json</code> on the spot, as
+        <code>poetry:stimulus:manifest</code> would, so the component that
+        names the controller loads. Commit the manifest, and restart a
+        running server: the manifest is read at boot.
+      </p>
     <% end %>
   </section>
 

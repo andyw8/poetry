@@ -35,6 +35,9 @@ module Poetry
     MANIFEST = "config/poetry_components.yml"
     # The host's Tailwind entry stylesheet (for @source injection).
     TAILWIND_ENTRY = "app/assets/tailwind/application.css"
+    # Where an item's Stimulus controllers land; a write here refreshes the
+    # app's controllers manifest.
+    CONTROLLERS_DIR = "app/javascript/controllers/"
 
     desc "Copy poetry components/blocks (plus dependencies) into the app, from the gems or any registry address"
 
@@ -116,8 +119,27 @@ module Poetry
       plan.writes.each { |write| create_file write.target, write.content, skip: true }
       plan.block_installs.each { |name| install_block(name) }
       apply_css(plan)
+      refresh_controllers_manifest(plan)
       report(plan)
       record_in_manifest(plan.manifest)
+    end
+
+    # An item that brings a Stimulus controller joins the app's controllers
+    # manifest straight away (as `bin/rails poetry:stimulus:manifest` would),
+    # so the component that names it by Symbol loads, and check validates
+    # its wiring. The manifest is read at boot: a running server restarts.
+    def refresh_controllers_manifest(plan)
+      return if options[:pretend] || behavior == :revoke
+      return unless plan.writes.any? { |write| write.target.to_s.start_with?(CONTROLLERS_DIR) }
+
+      result = Poetry::Core::Stimulus::HostManifest.generate!(root: Pathname(destination_root))
+      count = result.definitions.size
+      say_status :stimulus, "wrote config/controllers_manifest.json (#{count} controller#{"s" unless count == 1}) - " \
+                            "commit it, and restart a running server so components that name them load", :green
+      result.skipped.each do |skip|
+        say_status :stimulus,
+                   "skipped #{skip.identifier}: #{skip.reason} (unvalidated until written by hand)", :yellow
+      end
     end
 
     # The install plan for remote addresses through the registry client.

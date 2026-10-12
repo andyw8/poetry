@@ -2,6 +2,10 @@
 
 ## [0.1.13]
 
+### Added
+
+- `poetry:add` rewrites `config/controllers_manifest.json` when a registry item installs a Stimulus controller under `app/javascript/controllers`, as `poetry:stimulus:manifest` would. A component that names its controller by Symbol now loads after the install instead of raising until the host ran the task by hand. The generator says to commit the manifest and restart a running server.
+
 ### Fixed
 
 - `poetry:check` no longer warns about `poetry_native_select_option` and `poetry_native_select_optgroup` inside a loop. They render plain `<option>` and `<optgroup>` tags with no id to keep stable, and the `key:` the warning asked for would only leak into the HTML as an attribute. The registry's helpers section declares both identity-free, like the table parts.
