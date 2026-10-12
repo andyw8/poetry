@@ -24,7 +24,7 @@
         <% end %>
       <% end %>
       <div class="hidden items-center gap-6 sm:flex">
-        <%= render "shared/project_links" %>
+        <%= render "poetry/docs/shared/project_links" %>
       </div>
       <%= poetry_button(size: :sm, href: installation_path) { "Start building" } %>
       <%# Below sm the links live in a sheet behind a menu button. %>
@@ -38,7 +38,7 @@
             <% end %>
           <% end %>
           <div class="mt-6 flex items-center gap-2 border-t pt-6">
-            <%= render "shared/project_links" %>
+            <%= render "poetry/docs/shared/project_links" %>
           </div>
         <% end %>
       </div>
@@ -329,7 +329,7 @@
       <% end %>
       <%= poetry_link(href: "https://rubyai.beehiiv.com/", target: "_blank", rel: "noopener") { "Ruby AI News" } %>
       <span class="flex items-center gap-1">
-        <%= render "shared/project_links" %>
+        <%= render "poetry/docs/shared/project_links" %>
       </span>
     <% end %>
   </div>

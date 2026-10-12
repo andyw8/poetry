@@ -2,6 +2,10 @@
 
 ## [0.1.13]
 
+### Added
+
+- `Poetry::Docs::HostLayout`: a host application's own controller includes it to render inside the docs layout, with the sidebar, header, search and meta tags, so pages the host serves beside the docs (the registry pages planned for poetryui.com) look like the rest of the site. The layout and the site nav reach the engine's routes through its mount proxy, `poetry_docs.`, and the shared partials moved to `poetry/docs/shared/` so a host's own `shared/` partials never stand in for them.
+
 ### Changed
 
 - The theming guide describes the design import's faint-edge warning.
