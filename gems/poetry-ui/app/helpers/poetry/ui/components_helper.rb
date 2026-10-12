@@ -972,9 +972,11 @@ module Poetry
       # these literals statically (the crash class: a helper-only literal
       # like align: :leading that no component contract covers, failing
       # only at render). Plain wrapper helpers need no entry here;
-      # registry generation lists them name-only. The table parts declare
-      # identity false: they mint no id, so the stable-identity rules have
-      # nothing to ask of them (a keyed row derives its id).
+      # registry generation lists them name-only. The table parts and the
+      # native select's option and optgroup declare identity false: they
+      # mint no id, so the stable-identity rules have nothing to ask of
+      # them (a keyed row derives its id; key: on an option would only
+      # leak as an HTML attribute).
       HELPER_CONTRACTS = {
         "poetry_table_header" => { "identity" => false },
         "poetry_table_body" => { "identity" => false },
@@ -983,6 +985,8 @@ module Poetry
         "poetry_table_head" => { "identity" => false },
         "poetry_table_cell" => { "identity" => false },
         "poetry_table_caption" => { "identity" => false },
+        "poetry_native_select_option" => { "identity" => false },
+        "poetry_native_select_optgroup" => { "identity" => false },
         "poetry_toast_trigger" => {
           "options" => [
             { "name" => "template", "type" => "string",

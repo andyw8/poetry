@@ -12160,8 +12160,10 @@ helpers:
   poetry_kbd_group: {}
   poetry_message_group: {}
   poetry_message_scroller_item: {}
-  poetry_native_select_optgroup: {}
-  poetry_native_select_option: {}
+  poetry_native_select_optgroup:
+    identity: false
+  poetry_native_select_option:
+    identity: false
   poetry_navigation_menu_link: {}
   poetry_optimistic_form:
     yields: the form builder - form.optimistic_template authors the predicted turbo-stream(s);

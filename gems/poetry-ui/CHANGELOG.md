@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.1.13]
+
+### Fixed
+
+- `poetry:check` no longer warns about `poetry_native_select_option` and `poetry_native_select_optgroup` inside a loop. They render plain `<option>` and `<optgroup>` tags with no id to keep stable, and the `key:` the warning asked for would only leak into the HTML as an attribute. The registry's helpers section declares both identity-free, like the table parts.
+
 ## [0.1.12] - 2026-10-07
 
 ### Fixed
