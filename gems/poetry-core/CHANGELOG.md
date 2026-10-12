@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.1.13]
+
+### Added
+
+- `poetry:design:import` warns when a palette makes border or input too faint to see: in each mode the import touches, both are measured against the background, card and popover, and a pair below 1.15:1 is reported with the nearest visible lightness. The colors still ship, since a faint edge is a design choice and not an accessibility floor. A dark palette that gave border, input and card one value hid every bordered control on cards. The JSON report carries the warnings as `edges`.
+
 ## [0.1.12] - 2026-10-07
 
 ### Changed

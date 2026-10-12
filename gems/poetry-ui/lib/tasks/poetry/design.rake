@@ -271,6 +271,10 @@ def poetry_design_report(plan, written)
     out << "  contrast (merged set, AA floor):"
     plan.contrast.each { |result| out << "    #{result}" }
   end
+  if plan.edges.any?
+    out << "  faint edges (shipped; border and input vanish on these surfaces):"
+    plan.edges.each { |edge| out << "    #{edge}" }
+  end
   if plan.dropped.any?
     out << "  dropped (never guessed):"
     plan.dropped.each { |drop| out << "    #{drop.name}: #{drop.reason}" }
@@ -294,6 +298,10 @@ def poetry_design_report_json(plan, written)
     "contrast" => plan.contrast.map do |r|
       { "mode" => r.mode, "pair" => r.label, "ratio" => r.ratio.round(2), "pass" => r.pass,
         "suggestion" => r.suggestion, "shipped_failing" => r.shipped }.compact
+    end,
+    "edges" => plan.edges.map do |e|
+      { "mode" => e.mode, "edge" => e.edge, "surface" => e.surface, "ratio" => e.ratio.round(2),
+        "suggestion" => e.suggestion }.compact
     end,
     "dropped" => plan.dropped.map do |d|
       { "name" => d.name, "value" => d.value, "mode" => d.mode, "reason" => d.reason }.compact

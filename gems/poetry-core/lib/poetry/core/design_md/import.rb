@@ -28,6 +28,13 @@ module Poetry
       # @api private
       class Import
         AA = 4.5
+        # The contrast a border or input line needs against the surfaces it
+        # sits on to be seen. Below it every bordered control on that
+        # surface disappears; the import warns and ships anyway, since a
+        # faint edge is a design choice, never an accessibility floor.
+        EDGE = 1.15
+        EDGES = %w[border input].freeze
+        SURFACES = %w[background card popover].freeze
 
         # Conservative cross-ecosystem role aliases - every application is
         # itself reported, so nothing maps silently. Names already matching
@@ -62,12 +69,22 @@ module Poetry
           end
         end
 
+        # One line too faint against a surface it sits on, with the nearest
+        # lightness that clears EDGE.
+        Edge = Struct.new(:mode, :edge, :surface, :ratio, :suggestion, keyword_init: true) do
+          # The warning as one line: mode, the pair, its ratio and the nearest visible value.
+          def to_s
+            line = "[#{mode}] #{edge} on #{surface}: #{format("%.2f", ratio)}:1 (visible needs >= #{EDGE})"
+            suggestion ? "#{line}; nearest visible: #{suggestion}" : line
+          end
+        end
+
         # pins: dark-mode values RESTATED from the shipped defaults for every
         # light-overridden token the source gave no dark value for. Without
         # them a light-only import's :root block would also win in dark mode
         # (:root and .dark tie on specificity; the overrides file loads
         # later) - pinning keeps dark exactly as shipped, no fabrication.
-        Plan = Struct.new(:overrides, :pins, :radius, :applied, :dropped, :contrast, :typography_note,
+        Plan = Struct.new(:overrides, :pins, :radius, :applied, :dropped, :contrast, :edges, :typography_note,
                           keyword_init: true) do
           # Whether the plan changes a radius or any color.
           def any_overrides?
@@ -102,7 +119,7 @@ module Poetry
           end
 
           Plan.new(overrides: overrides, pins: dark_pins(overrides), radius: doc["radius"],
-                   applied: applied, dropped: dropped, contrast: contrast,
+                   applied: applied, dropped: dropped, contrast: contrast, edges: faint_edges(overrides),
                    typography_note: typography_note(doc))
         end
 
@@ -114,10 +131,19 @@ module Poetry
         # @param candidate [Tokens::Color] the color to walk
         # @param against [Tokens::Color] the fixed other member of the pair
         # @return [Tokens::Color, nil] the nearest passing color, or nil
-        def nearest_aa(candidate, against)
+        def nearest_aa(candidate, against) = nearest_contrast(candidate, against, AA)
+
+        # The same walk to any contrast floor: AA for text, EDGE for lines.
+        #
+        # @param candidate [Tokens::Color] the color to walk
+        # @param against [Tokens::Color] the fixed other member of the pair
+        # @param floor [Float] the ratio the pair must reach
+        # @return [Tokens::Color, nil] the nearest passing color, or nil
+        def nearest_contrast(candidate, against, floor)
           step = candidate.l > against.l ? 0.01 : -0.01
+          step = 0.01 if candidate.l == against.l && against.l < 0.5
           color = candidate
-          until color.contrast_ratio(against) >= AA
+          until color.contrast_ratio(against) >= floor
             next_l = (color.l + step).round(3)
             return nil unless next_l.between?(0.0, 1.0)
 
@@ -163,6 +189,28 @@ module Poetry
           (doc.dig("unknown", "colors") || {}).each do |name, value|
             dropped << Drop.new(name: name, value: value, mode: nil,
                                 reason: "unparseable color value (hex/rgb/oklch only)")
+          end
+        end
+
+        # Border and input against every surface, in each mode the import
+        # touches one of them: the lines too faint to see (the case of a dark
+        # palette giving border, input and card one value).
+        def faint_edges(overrides)
+          overrides.flat_map do |mode, colors|
+            next [] unless colors.keys.intersect?(EDGES + SURFACES)
+
+            EDGES.product(SURFACES).filter_map do |edge, surface|
+              line = merged(mode, edge, overrides)
+              fill = merged(mode, surface, overrides)
+              next unless line && fill
+
+              ratio = line.contrast_ratio(fill)
+              next if ratio >= EDGE
+
+              walked = nearest_contrast(line, fill, EDGE)
+              Edge.new(mode: mode, edge: edge, surface: surface, ratio: ratio,
+                       suggestion: walked && "--#{edge}: #{walked.css}")
+            end
           end
         end
 

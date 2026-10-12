@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.1.13]
+
+### Changed
+
+- The theming guide describes the design import's faint-edge warning.
+
 ## [0.1.12] - 2026-10-07
 
 ### Added

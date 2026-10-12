@@ -272,7 +272,11 @@
         measured against the WCAG AA floor on the merged set; a failing pair
         is dropped with a deterministic nearest-passing suggestion (an OKLCH
         lightness walk, chroma held), and only
-        <code>POETRY_DESIGN_FORCE=1</code> ships one. Fonts never enter CSS
+        <code>POETRY_DESIGN_FORCE=1</code> ships one. Border and input are
+        also measured against the background, card and popover of each mode
+        the import touches: below 1.15:1 every bordered control on that
+        surface disappears, so the report warns with the nearest visible
+        value and ships the palette anyway. Fonts never enter CSS
         (the pairing above stays metadata); a light-only palette gets its
         dark values pinned to the Poetry defaults so the overrides can't
         leak across modes. The result lands in

@@ -120,6 +120,37 @@ module Poetry
           assert_equal %w[accent accent-hover ink mist paper], plan.dropped.map(&:name).sort
           assert_match(/font-family: Inter/, plan.typography_note)
         end
+
+        def dark_doc(colors)
+          { "colors" => { "light" => {}, "dark" => colors.transform_values { Tokens::Color.parse(it) } }, "unknown" => { "colors" => {} } }
+        end
+
+        def test_faint_edges_warn_when_border_and_input_match_the_surfaces
+          plan = import.plan(dark_doc("card" => "#303030", "popover" => "#303030", "border" => "#303030",
+                                      "input" => "#303030"))
+
+          faint = plan.edges.map { [it.mode, it.edge, it.surface] }
+
+          assert_includes faint, %w[dark border card]
+          assert_includes faint, %w[dark input popover]
+          edge = plan.edges.find { it.edge == "border" && it.surface == "card" }
+
+          assert_in_delta 1.0, edge.ratio, 0.01
+          assert_match(/\A--border: oklch\(/, edge.suggestion)
+          assert_includes edge.to_s, "nearest visible"
+          assert_includes plan.applied.map(&:role), "border", "a faint edge warns; the color still ships"
+        end
+
+        def test_a_visible_step_and_the_shipped_defaults_raise_no_edge_warning
+          assert_empty import.plan(dark_doc("card" => "#303030", "popover" => "#303030", "border" => "#3c3c3c",
+                                            "input" => "#3c3c3c")).edges
+          assert_empty import.plan(doc_with("primary" => Tokens::Color.parse("#2F5D50"))).edges,
+                       "light defaults clear the edge floor"
+        end
+
+        def test_edges_are_measured_only_in_a_mode_the_import_touches
+          assert_empty import.plan(doc_with("primary" => Tokens::Color.parse("#2F5D50"))).edges
+        end
       end
     end
   end
