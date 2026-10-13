@@ -1,5 +1,5 @@
 {
-  "poetry_version": "0.1.12",
+  "poetry_version": "0.1.13",
   "gem": "poetry-charts",
   "objects": [
     {
@@ -107,7 +107,7 @@
         },
         {
           "name": "VERSION",
-          "value": "\"0.1.12\"",
+          "value": "\"0.1.13\"",
           "docstring": "The gem version."
         }
       ]
