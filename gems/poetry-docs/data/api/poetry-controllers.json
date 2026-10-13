@@ -124,6 +124,49 @@
       "constants": []
     },
     {
+      "path": "@poetry/controllers/behaviors/clipboard",
+      "type": "module",
+      "superclass": null,
+      "docstring": "useClipboard: copying text for one connect. The async Clipboard API\nwhere the page may use it, else a hidden textarea and execCommand; the\ncopied flag resets after `resetAfter` and its timer clears at teardown.",
+      "examples": [],
+      "file": "app/javascript/poetry/core/behaviors/clipboard.js",
+      "methods": [
+        {
+          "name": "useClipboard",
+          "scope": "class",
+          "group": null,
+          "signature": "useClipboard(controller, { resetAfter = 2000, onChange = () => {} } = {})",
+          "docstring": "A copier for the controller's current connect.",
+          "params": [
+            {
+              "name": "controller",
+              "types": [
+                "Object"
+              ],
+              "text": "the Stimulus controller instance"
+            },
+            {
+              "name": "}",
+              "types": [
+                "{ resetAfter?: number, onChange?: (copied: boolean) => void "
+              ],
+              "text": "[options] how long the copied state lasts, in milliseconds, and who hears it change"
+            }
+          ],
+          "return": {
+            "types": [
+              "{ copy: (text: string) => Promise<boolean> "
+            ],
+            "text": "} copy resolves true when the text reached the clipboard"
+          },
+          "examples": [],
+          "file": "app/javascript/poetry/core/behaviors/clipboard.js",
+          "line": 14
+        }
+      ],
+      "constants": []
+    },
+    {
       "path": "@poetry/controllers/behaviors/escape",
       "type": "module",
       "superclass": null,
@@ -169,6 +212,152 @@
           "examples": [],
           "file": "app/javascript/poetry/core/behaviors/escape.js",
           "line": 14
+        }
+      ],
+      "constants": []
+    },
+    {
+      "path": "@poetry/controllers/behaviors/in_view",
+      "type": "module",
+      "superclass": null,
+      "docstring": "useInView: whether an element is on screen, for one connect, over\nIntersectionObserver. Reveal-on-scroll and lazy starts read it; the\nobserver disconnects at teardown. Without IntersectionObserver the\nelement counts as visible at once, so content never stays hidden.",
+      "examples": [],
+      "file": "app/javascript/poetry/core/behaviors/in_view.js",
+      "methods": [
+        {
+          "name": "useInView",
+          "scope": "class",
+          "group": null,
+          "signature": "useInView(controller, element, onChange, options = {})",
+          "docstring": "Reports `element` entering and leaving the viewport (or `root`) until\nteardown(controller). With `once`, it reports the first entry and stops.",
+          "params": [
+            {
+              "name": "controller",
+              "types": [
+                "Object"
+              ],
+              "text": "the Stimulus controller instance"
+            },
+            {
+              "name": "element",
+              "types": [
+                "Element"
+              ],
+              "text": "the element to watch"
+            },
+            {
+              "name": "onChange",
+              "types": [
+                "(inView: boolean, entry?: IntersectionObserverEntry) => void"
+              ],
+              "text": "the handler"
+            },
+            {
+              "name": "}",
+              "types": [
+                "{ root?: Element, rootMargin?: string, threshold?: number | number[], once?: boolean "
+              ],
+              "text": "[options]"
+            }
+          ],
+          "return": {
+            "types": [
+              "() => void"
+            ],
+            "text": "stops watching early; teardown stops it otherwise"
+          },
+          "examples": [],
+          "file": "app/javascript/poetry/core/behaviors/in_view.js",
+          "line": 17
+        }
+      ],
+      "constants": []
+    },
+    {
+      "path": "@poetry/controllers/behaviors/interval",
+      "type": "module",
+      "superclass": null,
+      "docstring": "useInterval and useTimeout: timers that live for one connect. The\nclears are registered for you, so a ticker or an autoplay never fires\ninto a disconnected controller.",
+      "examples": [],
+      "file": "app/javascript/poetry/core/behaviors/interval.js",
+      "methods": [
+        {
+          "name": "useInterval",
+          "scope": "class",
+          "group": null,
+          "signature": "useInterval(controller, callback, milliseconds)",
+          "docstring": "Calls `callback` every `milliseconds` until teardown(controller).",
+          "params": [
+            {
+              "name": "controller",
+              "types": [
+                "Object"
+              ],
+              "text": "the Stimulus controller instance"
+            },
+            {
+              "name": "callback",
+              "types": [
+                "() => void"
+              ],
+              "text": "the tick"
+            },
+            {
+              "name": "milliseconds",
+              "types": [
+                "number"
+              ],
+              "text": "the period"
+            }
+          ],
+          "return": {
+            "types": [
+              "() => void"
+            ],
+            "text": "stops the interval early; teardown stops it otherwise"
+          },
+          "examples": [],
+          "file": "app/javascript/poetry/core/behaviors/interval.js",
+          "line": 14
+        },
+        {
+          "name": "useTimeout",
+          "scope": "class",
+          "group": null,
+          "signature": "useTimeout(controller, callback, milliseconds)",
+          "docstring": "Calls `callback` once after `milliseconds`, unless teardown(controller)\ncomes first.",
+          "params": [
+            {
+              "name": "controller",
+              "types": [
+                "Object"
+              ],
+              "text": "the Stimulus controller instance"
+            },
+            {
+              "name": "callback",
+              "types": [
+                "() => void"
+              ],
+              "text": "the delayed call"
+            },
+            {
+              "name": "milliseconds",
+              "types": [
+                "number"
+              ],
+              "text": "the delay"
+            }
+          ],
+          "return": {
+            "types": [
+              "() => void"
+            ],
+            "text": "cancels early; teardown cancels otherwise"
+          },
+          "examples": [],
+          "file": "app/javascript/poetry/core/behaviors/interval.js",
+          "line": 29
         }
       ],
       "constants": []
@@ -274,6 +463,56 @@
       "constants": []
     },
     {
+      "path": "@poetry/controllers/behaviors/measure",
+      "type": "module",
+      "superclass": null,
+      "docstring": "useMeasure: an element's size for one connect, over ResizeObserver.\nThe handler runs now with the current size and again on every change;\nthe observer disconnects at teardown. Without ResizeObserver it runs\nonce.",
+      "examples": [],
+      "file": "app/javascript/poetry/core/behaviors/measure.js",
+      "methods": [
+        {
+          "name": "useMeasure",
+          "scope": "class",
+          "group": null,
+          "signature": "useMeasure(controller, element, onResize)",
+          "docstring": "Reports `element`'s content box until teardown(controller).",
+          "params": [
+            {
+              "name": "controller",
+              "types": [
+                "Object"
+              ],
+              "text": "the Stimulus controller instance"
+            },
+            {
+              "name": "element",
+              "types": [
+                "Element"
+              ],
+              "text": "the element to measure"
+            },
+            {
+              "name": ")",
+              "types": [
+                "(size: { width: number, height: number "
+              ],
+              "text": "=> void} onResize - the handler"
+            }
+          ],
+          "return": {
+            "types": [
+              "() => void"
+            ],
+            "text": "stops measuring early; teardown stops it otherwise"
+          },
+          "examples": [],
+          "file": "app/javascript/poetry/core/behaviors/measure.js",
+          "line": 15
+        }
+      ],
+      "constants": []
+    },
+    {
       "path": "@poetry/controllers/behaviors/mobile",
       "type": "module",
       "superclass": null,
@@ -312,6 +551,63 @@
           "examples": [],
           "file": "app/javascript/poetry/core/behaviors/mobile.js",
           "line": 14
+        }
+      ],
+      "constants": []
+    },
+    {
+      "path": "@poetry/controllers/behaviors/mutation",
+      "type": "module",
+      "superclass": null,
+      "docstring": "useMutation: changes under an element for one connect, over\nMutationObserver; the observer disconnects at teardown. The default\nwatches children added and removed anywhere below.",
+      "examples": [],
+      "file": "app/javascript/poetry/core/behaviors/mutation.js",
+      "methods": [
+        {
+          "name": "useMutation",
+          "scope": "class",
+          "group": null,
+          "signature": "useMutation(controller, element, onMutate, options = { childList: true, subtree: true })",
+          "docstring": "Reports mutations under `element` until teardown(controller).",
+          "params": [
+            {
+              "name": "controller",
+              "types": [
+                "Object"
+              ],
+              "text": "the Stimulus controller instance"
+            },
+            {
+              "name": "element",
+              "types": [
+                "Node"
+              ],
+              "text": "the node to observe"
+            },
+            {
+              "name": "onMutate",
+              "types": [
+                "(records: MutationRecord[]) => void"
+              ],
+              "text": "the handler"
+            },
+            {
+              "name": "[options]",
+              "types": [
+                "MutationObserverInit"
+              ],
+              "text": "what to watch; children in the subtree by default"
+            }
+          ],
+          "return": {
+            "types": [
+              "() => void"
+            ],
+            "text": "stops observing early; teardown stops it otherwise"
+          },
+          "examples": [],
+          "file": "app/javascript/poetry/core/behaviors/mutation.js",
+          "line": 15
         }
       ],
       "constants": []

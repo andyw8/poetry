@@ -27,6 +27,11 @@
       "methods": [],
       "constants": [
         {
+          "name": "CONTROLLERS_DIR",
+          "value": "\"app/javascript/controllers/\"",
+          "docstring": "Where an item's Stimulus controllers land; a write here refreshes the\napp's controllers manifest."
+        },
+        {
           "name": "DEPENDENCIES",
           "value": "Poetry::Ui::COMPONENT_DEPENDENCIES",
           "docstring": "Composition edges - single-sourced on the gem module (the\nregistry items emit the same map as registryDependencies)."
@@ -6065,7 +6070,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1581
+          "line": 1585
         },
         {
           "name": "poetry_alert",
@@ -6099,7 +6104,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1054
+          "line": 1058
         },
         {
           "name": "poetry_aspect_ratio",
@@ -6133,7 +6138,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1481
+          "line": 1485
         },
         {
           "name": "poetry_attachment_group",
@@ -6150,7 +6155,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1492
+          "line": 1496
         },
         {
           "name": "poetry_autocomplete",
@@ -6235,7 +6240,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1397
+          "line": 1401
         },
         {
           "name": "poetry_bubble_group",
@@ -6252,7 +6257,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1410
+          "line": 1414
         },
         {
           "name": "poetry_button",
@@ -6388,7 +6393,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1252
+          "line": 1256
         },
         {
           "name": "poetry_checkbox_group",
@@ -6405,7 +6410,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1268
+          "line": 1272
         },
         {
           "name": "poetry_checkbox_group_all",
@@ -6422,7 +6427,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1283
+          "line": 1287
         },
         {
           "name": "poetry_checkbox_group_item",
@@ -6439,7 +6444,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1293
+          "line": 1297
         },
         {
           "name": "poetry_clipboard_text",
@@ -6456,7 +6461,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1307
+          "line": 1311
         },
         {
           "name": "poetry_code_block",
@@ -6473,7 +6478,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1321
+          "line": 1325
         },
         {
           "name": "poetry_collapsible",
@@ -6490,7 +6495,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1568
+          "line": 1572
         },
         {
           "name": "poetry_color_scheme_script",
@@ -6507,7 +6512,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1777
+          "line": 1781
         },
         {
           "name": "poetry_combobox",
@@ -6524,7 +6529,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1685
+          "line": 1689
         },
         {
           "name": "poetry_command",
@@ -6541,7 +6546,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1711
+          "line": 1715
         },
         {
           "name": "poetry_command_dialog",
@@ -6558,7 +6563,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1724
+          "line": 1728
         },
         {
           "name": "poetry_context_menu",
@@ -6575,7 +6580,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1698
+          "line": 1702
         },
         {
           "name": "poetry_data_table",
@@ -6609,7 +6614,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1119
+          "line": 1123
         },
         {
           "name": "poetry_date_picker",
@@ -6643,7 +6648,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1143
+          "line": 1147
         },
         {
           "name": "poetry_deferred",
@@ -6677,7 +6682,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1026
+          "line": 1030
         },
         {
           "name": "poetry_drawer",
@@ -6711,7 +6716,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1655
+          "line": 1659
         },
         {
           "name": "poetry_empty",
@@ -6745,7 +6750,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1204
+          "line": 1208
         },
         {
           "name": "poetry_field_group",
@@ -6762,7 +6767,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1232
+          "line": 1236
         },
         {
           "name": "poetry_field_separator",
@@ -6779,7 +6784,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1242
+          "line": 1246
         },
         {
           "name": "poetry_fieldset",
@@ -6796,7 +6801,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1216
+          "line": 1220
         },
         {
           "name": "poetry_file_input",
@@ -6830,7 +6835,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1642
+          "line": 1646
         },
         {
           "name": "poetry_icon",
@@ -6864,7 +6869,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1756
+          "line": 1760
         },
         {
           "name": "poetry_input",
@@ -6881,7 +6886,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1064
+          "line": 1068
         },
         {
           "name": "poetry_input_group",
@@ -7000,7 +7005,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1086
+          "line": 1090
         },
         {
           "name": "poetry_item",
@@ -7085,7 +7090,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1095
+          "line": 1099
         },
         {
           "name": "poetry_link",
@@ -7119,7 +7124,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1469
+          "line": 1473
         },
         {
           "name": "poetry_menubar",
@@ -7136,7 +7141,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1740
+          "line": 1744
         },
         {
           "name": "poetry_message",
@@ -7153,7 +7158,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1448
+          "line": 1452
         },
         {
           "name": "poetry_message_group",
@@ -7170,7 +7175,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1460
+          "line": 1464
         },
         {
           "name": "poetry_message_scroller",
@@ -7187,7 +7192,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1503
+          "line": 1507
         },
         {
           "name": "poetry_message_scroller_item",
@@ -7204,7 +7209,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1517
+          "line": 1521
         },
         {
           "name": "poetry_metadata_list",
@@ -7238,7 +7243,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1153
+          "line": 1157
         },
         {
           "name": "poetry_native_select",
@@ -7340,7 +7345,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1108
+          "line": 1112
         },
         {
           "name": "poetry_optimistic_form",
@@ -7391,7 +7396,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1594
+          "line": 1598
         },
         {
           "name": "poetry_progress",
@@ -7425,7 +7430,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1360
+          "line": 1364
         },
         {
           "name": "poetry_radio_group",
@@ -7442,7 +7447,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1377
+          "line": 1381
         },
         {
           "name": "poetry_resizable",
@@ -7493,7 +7498,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1163
+          "line": 1167
         },
         {
           "name": "poetry_select",
@@ -7510,7 +7515,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1670
+          "line": 1674
         },
         {
           "name": "poetry_sensitive_input",
@@ -7527,7 +7532,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1334
+          "line": 1338
         },
         {
           "name": "poetry_separator",
@@ -7561,7 +7566,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1039
+          "line": 1043
         },
         {
           "name": "poetry_sidebar",
@@ -7799,7 +7804,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1388
+          "line": 1392
         },
         {
           "name": "poetry_spinner",
@@ -7850,7 +7855,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1345
+          "line": 1349
         },
         {
           "name": "poetry_table",
@@ -7901,7 +7906,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1176
+          "line": 1180
         },
         {
           "name": "poetry_textarea",
@@ -7918,7 +7923,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1076
+          "line": 1080
         },
         {
           "name": "poetry_time_field",
@@ -7935,7 +7940,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1131
+          "line": 1135
         },
         {
           "name": "poetry_timeline",
@@ -7969,7 +7974,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1539
+          "line": 1543
         },
         {
           "name": "poetry_toast_trigger",
@@ -8003,7 +8008,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1555
+          "line": 1559
         },
         {
           "name": "poetry_toggle",
@@ -8020,7 +8025,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1422
+          "line": 1426
         },
         {
           "name": "poetry_toggle_group",
@@ -8037,7 +8042,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1435
+          "line": 1439
         },
         {
           "name": "poetry_toolbar",
@@ -8071,7 +8076,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1608
+          "line": 1612
         },
         {
           "name": "poetry_tooltip_provider",
@@ -8088,7 +8093,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1623
+          "line": 1627
         },
         {
           "name": "poetry_tree",
@@ -8105,7 +8110,7 @@
             }
           ],
           "file": "app/helpers/poetry/ui/components_helper.rb",
-          "line": 1191
+          "line": 1195
         },
         {
           "name": "poetry_typeset",
@@ -8151,7 +8156,7 @@
         {
           "name": "HELPER_CONTRACTS",
           "value": "{\n  \"poetry_table_header\" => { \"identity\" => false },\n  \"poetry_table_body\" => { \"identity\" => false },\n  \"poetry_table_footer\" => { \"identity\" => false },\n  \"poetry_table_row\" => { \"identity\" => fals",
-          "docstring": "The value contracts runtime-enforced inside wrapper helpers, in\nregistry shape - emitted as the registry's \"helpers\" section\n(rakelib/registry.rake) so poetry check and the MCP server validate\nthese literals statically (the crash class: a helper-only literal\nlike align: :leading that no component contract covers, failing\nonly at render). Plain wrapper helpers need no entry here;\nregistry generation lists them name-only. The table parts declare\nidentity false: they mint no id, so the stable-identity rules have\nnothing to ask of them (a keyed row derives its id)."
+          "docstring": "The value contracts runtime-enforced inside wrapper helpers, in\nregistry shape - emitted as the registry's \"helpers\" section\n(rakelib/registry.rake) so poetry check and the MCP server validate\nthese literals statically (the crash class: a helper-only literal\nlike align: :leading that no component contract covers, failing\nonly at render). Plain wrapper helpers need no entry here;\nregistry generation lists them name-only. The table parts and the\nnative select's option and optgroup declare identity false: they\nmint no id, so the stable-identity rules have nothing to ask of\nthem (a keyed row derives its id; key: on an option would only\nleak as an HTML attribute)."
         },
         {
           "name": "INPUT_GROUP_ALIGNS",
