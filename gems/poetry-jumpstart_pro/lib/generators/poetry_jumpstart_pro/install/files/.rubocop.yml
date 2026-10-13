@@ -1,0 +1,10 @@
+# The Ruby in this directory is copied verbatim into a host app by
+# `poetry_jumpstart_pro:install` (the pagination and toast helper), so the
+# host's own config lints it: rubocop-rails-omakase, which fixes the
+# continuation of a multi-line call one indent in. Inherit this gem's config
+# and match that rule here so the installed file is clean in the app it
+# lands in.
+inherit_from: ../../../../../.rubocop.yml
+
+Layout/ArgumentAlignment:
+  EnforcedStyle: with_fixed_indentation
