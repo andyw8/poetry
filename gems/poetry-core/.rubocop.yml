@@ -118,3 +118,12 @@ YARD/CollectionStyle:
 # which this gem catalogues.
 ViewComponent/MissingPreview:
   Enabled: false
+
+# Core's `test/components` tier is the machinery's own unit tests: they build an
+# inline fixture component and assert on the builder the template consumes
+# (`PlainComponent.new.root_attributes`, the emitted data-* wiring, the BEM
+# class string). `render_inline` would render `Poetry::Core::Component`'s own
+# template instead, which says less about the builder under test. Where
+# rendering is the contract (Box, element_tag, the wrapper) the tests do render.
+ViewComponent/TestRenderedOutput:
+  Enabled: false
