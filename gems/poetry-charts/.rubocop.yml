@@ -113,3 +113,11 @@ ViewComponent:
 # shape and it flags components that do have a preview.
 ViewComponent/MissingPreview:
   Enabled: false
+
+# ComposedChart#horizontal? is the BarMath host contract - composed charts are
+# vertical only - and tooltip_wiring probes it with respond_to?, so it has to
+# stay public. The cop scans templates for call sites and the chart has none
+# that reach it.
+ViewComponent/PreferPrivateMethods:
+  Exclude:
+    - "app/components/poetry/charts/composed_chart/component.rb"

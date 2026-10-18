@@ -159,3 +159,13 @@ ViewComponent/PreferPrivateMethods:
     - open_menu?
     - register_menu
     - webmcp_tool_definition
+  # The methods left public in these files are plumbing the cop cannot see used:
+  # called from a `renders_one` lambda, from a part class (`@bar.…`), or through
+  # a `from:` source the stimulus renderer invokes with `send`. Exempt the file
+  # rather than restate those names as interface.
+  Exclude:
+    - "app/components/poetry/ui/field/component.rb"
+    - "app/components/poetry/ui/input_otp/component.rb"
+    - "app/components/poetry/ui/menubar/component.rb"
+    - "app/components/poetry/ui/menus.rb"
+    - "app/components/poetry/ui/questionnaire/component.rb"

@@ -127,3 +127,17 @@ ViewComponent/MissingPreview:
 # rendering is the contract (Box, element_tag, the wrapper) the tests do render.
 ViewComponent/TestRenderedOutput:
   Enabled: false
+
+# The base component's builder surface is public contract: the component gems'
+# subclasses and templates read and override these - root_attributes,
+# attributes, html_attributes, classnames, to_html, content, persisted? - and
+# the Wrapper hands its child back the same way. The test files declare inline
+# fixture components whose methods (css, root_attributes, type, label_text) are
+# the thing under test rather than rendered output.
+ViewComponent/PreferPrivateMethods:
+  Exclude:
+    - "app/components/poetry/core/component.rb"
+    - "app/components/poetry/core/wrapper/component.rb"
+    - "test/components/poetry/core/component_test.rb"
+    - "test/components/poetry/core/concerns/stimulus_test.rb"
+    - "test/components/poetry/core/root_attributes_test.rb"
