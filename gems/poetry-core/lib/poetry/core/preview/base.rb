@@ -212,7 +212,7 @@ module Poetry
         #     end
         #   end
         def render_component(component_or_props = nil, &block)
-          component = if component_or_props.is_a?(::ViewComponent::Base)
+          component = if component_or_props.is_a?(ViewComponent::Base)
                         component_or_props
                       else
                         self.class.component_class_name.constantize.new(**(component_or_props || {}))

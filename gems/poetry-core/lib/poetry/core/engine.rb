@@ -12,7 +12,7 @@ module Poetry
     # The Rails engine: wires the component autoload paths, previews,
     # importmap pins, asset paths, and the StableId / TagHelper mixins into
     # a host app at boot.
-    class Engine < ::Rails::Engine
+    class Engine < Rails::Engine
       # isolate_namespace Poetry::Core
 
       config.poetry_core = Poetry::Core::Config.current

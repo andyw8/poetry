@@ -427,7 +427,7 @@ module Poetry
         return unless defined?(@content_return)
 
         value = @content_return
-        return if value.nil? || value.is_a?(::String) || value.respond_to?(:each) || captured.present?
+        return if value.nil? || value.is_a?(String) || value.respond_to?(:each) || captured.present?
         return if value.is_a?(ViewComponent::Base) || value.is_a?(ViewComponent::Slot)
 
         message = "#{passthrough_owner} content block returned #{value.inspect.truncate(60)} (#{value.class}), " \

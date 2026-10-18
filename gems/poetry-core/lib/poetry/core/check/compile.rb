@@ -61,15 +61,15 @@ module Poetry
           #
           # @return [Boolean]
           def rendering?
-            return false unless defined?(::Herb::Engine) && defined?(::ActionView::Template)
+            return false unless defined?(Herb::Engine) && defined?(ActionView::Template)
 
-            handler = ::ActionView::Template.handler_for_extension(:erb)
+            handler = ActionView::Template.handler_for_extension(:erb)
             owner = handler.is_a?(Module) ? handler : handler.class
             return true if defined?(::ReActionView::Template::Handlers::ERB) &&
                            owner <= ::ReActionView::Template::Handlers::ERB
 
             implementation = owner.erb_implementation if owner.respond_to?(:erb_implementation)
-            implementation.is_a?(Class) && implementation <= ::Herb::Engine
+            implementation.is_a?(Class) && implementation <= Herb::Engine
           end
         end
 
