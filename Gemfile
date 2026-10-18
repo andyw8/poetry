@@ -20,8 +20,6 @@ gem "rubocop", "~> 1.21"
 gem "rubocop-minitest", require: false
 gem "rubocop-performance", require: false
 gem "rubocop-rake", require: false
-# Not on RubyGems yet; the cops the component gems are being measured against.
-gem "rubocop-view_component", github: "andyw8/rubocop-view_component", branch: "main", require: false
 gem "rubocop-yard", require: false
 gem "yard", require: false
 gem "yard-lint", require: false
