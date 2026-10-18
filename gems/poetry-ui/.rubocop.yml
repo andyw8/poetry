@@ -5,6 +5,12 @@ plugins:
   - rubocop-yard
   - rubocop-view_component
 
+# Arrays replace rather than merge by default, including a plugin's default
+# config, so the cop's interface list is joined instead of restated.
+inherit_mode:
+  merge:
+    - AllowedPublicMethods
+
 AllCops:
   TargetRubyVersion: 3.4
   Exclude:
@@ -133,23 +139,14 @@ ViewComponent/ComponentSuffix:
 ViewComponent/MissingPreview:
   Enabled: false
 
-# The cop's default list is ViewComponent's own interface. Poetry adds its own
-# public surface: the root attribute builder parts and subclasses override
-# (`root_attributes`), the control wiring a host splats into its input
+# Poetry's own public surface, merged onto the cop's default interface list
+# (see inherit_mode above): the root attribute builder parts and subclasses
+# override (`root_attributes`), the control wiring a host splats into its input
 # (`control_attributes`), NumberField's reader for the reserved `format` name,
 # the combobox selection readers, the bar coordination a Menu calls on its bar,
 # and the agent hook a component overrides (`webmcp_tool_definition`).
-# The list is restated in full - RuboCop replaces the array, it does not merge
-# it with the plugin default.
 ViewComponent/PreferPrivateMethods:
   AllowedPublicMethods:
-    - initialize
-    - call
-    - before_render
-    - before_render_check
-    - render?
-    - render_in
-    - around_render
     - root_attributes
     - control_attributes
     - number_format
