@@ -133,9 +133,12 @@ ViewComponent/ComponentSuffix:
 ViewComponent/MissingPreview:
   Enabled: false
 
-# The cop's default list is ViewComponent's own interface. Poetry adds
-# `root_attributes`: the documented, template-facing root-attribute builder
-# (`element_tag(:div, **root_attributes)`) that parts and subclasses override.
+# The cop's default list is ViewComponent's own interface. Poetry adds its own
+# public surface: the root attribute builder parts and subclasses override
+# (`root_attributes`), the control wiring a host splats into its input
+# (`control_attributes`), NumberField's reader for the reserved `format` name,
+# the combobox selection readers, the bar coordination a Menu calls on its bar,
+# and the agent hook a component overrides (`webmcp_tool_definition`).
 # The list is restated in full - RuboCop replaces the array, it does not merge
 # it with the plugin default.
 ViewComponent/PreferPrivateMethods:
@@ -148,3 +151,11 @@ ViewComponent/PreferPrivateMethods:
     - render_in
     - around_render
     - root_attributes
+    - control_attributes
+    - number_format
+    - selected_value
+    - selected_values
+    - tab_stop?
+    - open_menu?
+    - register_menu
+    - webmcp_tool_definition
