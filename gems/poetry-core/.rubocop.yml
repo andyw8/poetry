@@ -3,11 +3,29 @@ plugins:
   - rubocop-minitest
   - rubocop-rake
   - rubocop-yard
+  - rubocop-view_component
 
 AllCops:
   TargetRubyVersion: 3.4
   NewCops: enable
   SuggestExtensions: false
+  # The ViewComponent cops resolve component ancestry through the project
+  # index; they raise on the first class they inspect without it.
+  UseProjectIndex: true
+  # Core's components inherit `ViewComponent::Base` directly, and that lives in
+  # the view_component gem's lib - outside the project index - so without gem
+  # indexing every ViewComponent cop here inspects nothing.
+  ProjectIndexIncludesGems: true
+
+# `ProjectIndexIncludesGems` indexes every gem's lib, which is what the
+# ViewComponent cops need - but the index is Ruby source only, so a core class
+# appears only through the gems that reopen it (File via pp, Time via
+# ActiveSupport) with a partial member list. The C-defined methods the class
+# really has (File.read, Time.now, Kernel#send) stay invisible, the ancestry
+# still resolves, and every ordinary call on them reads as a typo. Constants
+# still check; only the method half is off.
+Lint/NameTypo:
+  CheckMethods: false
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes

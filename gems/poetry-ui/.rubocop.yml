@@ -3,6 +3,7 @@ plugins:
   - rubocop-minitest
   - rubocop-rake
   - rubocop-yard
+  - rubocop-view_component
 
 AllCops:
   TargetRubyVersion: 3.4
@@ -11,9 +12,20 @@ AllCops:
     - "test/dummy/tmp/**/*"
     - "lib/generators/poetry/pagination/templates/**/*" # generated host-app code; its style belongs to the host
     - "test/dommy_tier/support/browser_harness.rb" # vendored from dommy-js-quickjs, kept byte-identical
+    # Committed eval output: the assembly scripts under each dated run are
+    # one-shot records of a finished round ("bundle exec ruby <this file>"),
+    # never loaded together and never shipped.
+    - "eval/results/**/*"
+    # Dev-only tooling (theme porting, visual review, snapshot refresh): same
+    # one-shot-cli shape, top-level constants between scripts that never load
+    # together, and nothing here ships.
+    - "script/**/*"
     - "vendor/**/*"
   NewCops: enable
   SuggestExtensions: false
+  # The ViewComponent cops resolve component ancestry through the project
+  # index; they raise on the first class they inspect without it.
+  UseProjectIndex: true
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
@@ -96,3 +108,43 @@ Minitest/MultipleAssertions:
 # the long collection form (Array<String>) is the house style.
 YARD/CollectionStyle:
   EnforcedStyle: long
+
+# --- component conventions ----------------------------------------------------
+
+# Component ancestry passes through poetry-core (a sibling engine gem), whose
+# catalog lives outside this project; index it so the ViewComponent cops can
+# resolve what a component inherits from.
+ViewComponent:
+  AdditionalSourcePaths:
+    - "../poetry-core/app/components"
+
+# Parts - the nested slot classes a component owns (combobox items, menu
+# entries, tab triggers, table rows) - are not standalone components and wear
+# their DOM part's name; the suffix rule does not apply to them. The outer
+# class is always `...::Component`.
+ViewComponent/ComponentSuffix:
+  Enabled: false
+
+# Previews ship as a sidecar beside the component -
+# `app/components/poetry/ui/<name>/preview.rb`, one per component. The cop
+# builds its candidates as `<name>_preview.rb` under `PreviewPaths` and tests
+# them with File.exist? (no globs), so no PreviewPaths value can describe this
+# shape and it flags components that do have a preview.
+ViewComponent/MissingPreview:
+  Enabled: false
+
+# The cop's default list is ViewComponent's own interface. Poetry adds
+# `root_attributes`: the documented, template-facing root-attribute builder
+# (`element_tag(:div, **root_attributes)`) that parts and subclasses override.
+# The list is restated in full - RuboCop replaces the array, it does not merge
+# it with the plugin default.
+ViewComponent/PreferPrivateMethods:
+  AllowedPublicMethods:
+    - initialize
+    - call
+    - before_render
+    - before_render_check
+    - render?
+    - render_in
+    - around_render
+    - root_attributes
