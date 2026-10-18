@@ -29,9 +29,8 @@ gem "rubocop", "~> 1.21"
 gem "rubocop-minitest", require: false
 gem "rubocop-performance", require: false
 gem "rubocop-rake", require: false
+gem "rubocop-view_component", "~> 0.8.0", require: false
 gem "rubocop-yard", require: false
-# Not on RubyGems yet: the plugin wired in .rubocop.yml.
-gem "rubocop-view_component", github: "andyw8/rubocop-view_component", branch: "main", require: false
 gem "yard-lint", require: false
 # Architecture gates: archspec check and the Rubydex linter rules (rake arch:*).
 gem "archspec", require: false
