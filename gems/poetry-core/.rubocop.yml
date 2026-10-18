@@ -108,3 +108,13 @@ Style/OneClassPerFile:
 # the long collection form (Array<String>) is the house style.
 YARD/CollectionStyle:
   EnforcedStyle: long
+
+# --- component conventions ----------------------------------------------------
+
+# Core ships no previews: `Poetry::Core::Preview::Base` is the framework the
+# host and the component gems build their previews on, and the previews belong
+# there, not here. Everything the cop flags is a test probe or a fixture host
+# app under test/, or one of the two shipped primitives (Box, Wrapper), none of
+# which this gem catalogues.
+ViewComponent/MissingPreview:
+  Enabled: false
